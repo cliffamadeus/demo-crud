@@ -66,12 +66,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="logout.php">Sign Out</a></li>
             </ul>
           </li>
           <p>
-              <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-              <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
+             
+             
           </p>
         </ul>
         <form class="d-flex mt-3" role="search">
@@ -85,10 +85,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <body>
     <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
-    <p>
-        <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-        <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
-    </p>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
