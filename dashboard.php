@@ -25,10 +25,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
 
-
-
-
   <style>
+     .wrapper{
+            width: 1000px;
+            margin: 0 auto;
+        }
     table tr td:last-child {
       width: 120px;
     }
@@ -87,74 +88,76 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 </nav>
 
 <body>
+  <div class="wrapper">
+    <div class="container-fluid">
+      <br>
+      <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+      <div class="col">
+        <div class="mt-5 mb-3 clearfix">
+          <h2 class="pull-left">Alumni Details</h2>
+          <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Alumni</a>
+        </div>
+        <?php
+        // Include config file
+        require_once "./db/config.php";
 
-  <div class="container-fluid">
-    <br>
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
-    <div class="col">
-      <div class="mt-5 mb-3 clearfix">
-        <h2 class="pull-left">Alumni Details</h2>
-        <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Alumni</a>
-      </div>
-      <?php
-      // Include config file
-      require_once "./db/config.php";
-
-      // Attempt select query execution
-      $sql = "SELECT * FROM employees";
-      if ($result = $pdo->query($sql)) {
-        if ($result->rowCount() > 0) {
-      ?>
-          <table id="example" class="table table-striped" style="width:100%;margin-top:5rem;">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Salary</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php while ($row = $result->fetch()) : ?>
+        // Attempt select query execution
+        $sql = "SELECT * FROM employees";
+        if ($result = $pdo->query($sql)) {
+          if ($result->rowCount() > 0) {
+        ?>
+            <table id="example" class="table table-striped" style="width:100%;margin-top:5rem;">
+              <thead>
                 <tr>
-                  <td><?= $row['id'] ?></td>
-                  <td><?= $row['name'] ?></td>
-                  <td><?= $row['address'] ?></td>
-                  <td><?= $row['salary'] ?></td>
-                  <td>
-                    <a href="read.php?id=<?= $row['id'] ?>" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>
-                    <a href="update.php?id=<?= $row['id'] ?>" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>
-                    <a href="delete.php?id=<?= $row['id'] ?>" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>
-                  </td>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Salary</th>
+                  <th>Action</th>
                 </tr>
-              <?php endwhile; ?>
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Salary</th>
-                <th>Action</th>
-              </tr>
-            </tfoot>
-          </table>
-      <?php
-          // Free result set
-          unset($result);
+              </thead>
+              <tbody>
+                <?php while ($row = $result->fetch()) : ?>
+                  <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['name'] ?></td>
+                    <td><?= $row['address'] ?></td>
+                    <td><?= $row['salary'] ?></td>
+                    <td>
+                      <a href="read.php?id=<?= $row['id'] ?>" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>
+                      <a href="update.php?id=<?= $row['id'] ?>" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>
+                      <a href="delete.php?id=<?= $row['id'] ?>" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>
+                    </td>
+                  </tr>
+                <?php endwhile; ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Salary</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+            </table>
+        <?php
+            // Free result set
+            unset($result);
+          } else {
+            echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+          }
         } else {
-          echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+          echo "Oops! Something went wrong. Please try again later.";
         }
-      } else {
-        echo "Oops! Something went wrong. Please try again later.";
-      }
 
-      // Close connection
-      unset($pdo);
-      ?>
+        // Close connection
+        unset($pdo);
+        ?>
+      </div>
     </div>
   </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
   <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
