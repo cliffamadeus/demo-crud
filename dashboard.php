@@ -44,7 +44,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <!-- Navigation Bar -->
 <nav class="navbar bg-body-tertiary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Alumni Registry</a>
+    <a class="navbar-brand" href="#">Employee Dashboard</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -94,8 +94,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
       <div class="col">
         <div class="mt-5 mb-3 clearfix">
-          <h2 class="pull-left">Alumni Details</h2>
-          <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Alumni</a>
+          <h2 class="pull-left">Employee Manager</h2>
+          <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Employee</a>
         </div>
         <?php
         // Include config file
